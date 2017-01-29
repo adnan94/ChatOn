@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d9d9d9"
+    tools:context="com.example.sarfraz.sarfarz.MyProfile">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:text="@string/hello_blank_fragment"
+        android:id="@+id/imageViewMyProfile"
+        android:src="@drawable/pic"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewMyProfile"
+        android:text="Adnan Ahmed"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/imageViewMyProfile"
+        android:layout_marginTop="10dp"
+        android:textSize="30dp"
+        ></TextView>
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="25-august-1994"
+    android:layout_below="@+id/textViewMyProfile"
+    android:layout_centerHorizontal="true"
+    android:textSize="20dp"
+    android:layout_marginTop="10dp"
+    android:id="@+id/textViewBirthdayMyProfile"
+    />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adnan.Ahmed94k@gmail.com"
+        android:layout_below="@+id/textViewBirthdayMyProfile"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:id="@+id/textViewEmailwMyProfile"
+        android:layout_marginTop="10dp"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alhumdulillah :)"
+        android:layout_below="@+id/textViewEmailwMyProfile"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:id="@+id/textViewStatusMyProfile"
+        android:layout_marginTop="10dp"
+        />
+
+
+</RelativeLayout>

@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context="com.example.sarfraz.sarfarz.GroupFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Give the name of group"
+        android:textSize="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/textViewGroupScreen"
+        android:textStyle="bold"
+        />
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:hint="Write the name of group "
+    android:layout_below="@id/textViewGroupScreen"
+    android:layout_marginTop="20dp"
+    android:background="#d9d9d9"
+    android:id="@+id/editTextGroupScreen"
+    />
+
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonCreateGroupScreen"
+        android:text="Create Group"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/editTextGroupScreen"
+        android:layout_centerHorizontal="true"
+        android:background="#4052b5"
+        android:textColor="#fff"
+        />
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonUploadGroupScreen"
+        android:text="Upload Image"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/buttonCreateGroupScreen"
+        android:layout_marginTop="11dp"
+        android:background="#4052b5"
+        android:textColor="#fff"
+
+        />
+</RelativeLayout>
