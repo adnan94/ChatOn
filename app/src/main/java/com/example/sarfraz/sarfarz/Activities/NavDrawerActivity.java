@@ -1,10 +1,13 @@
-package com.example.sarfraz.sarfarz;
+package com.example.sarfraz.sarfarz.Activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,9 +18,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.sarfraz.sarfarz.Fragments.GroupFragment;
+import com.example.sarfraz.sarfarz.Fragments.MyProfile;
+import com.example.sarfraz.sarfarz.Fragments.StatusFragment;
+import com.example.sarfraz.sarfarz.Fragments.UpdateInfo;
+import com.example.sarfraz.sarfarz.R;
+import com.example.sarfraz.sarfarz.pagerAdaptor;
+
 public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FragmentManager manager;
+    TabLayout tabLayout;
+    ViewPager viewPager;
+String array []={"Conversations","Contacts","Groups"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +39,12 @@ public class NavDrawerActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         manager=getSupportFragmentManager();
+        tabLayout=(TabLayout)findViewById(R.id.tabLayout);
+        viewPager=(ViewPager)findViewById(R.id.viewPager);
+
+        tabLayout.setupWithViewPager(viewPager);
+        pagerAdaptor pagerAdapter=new pagerAdaptor(manager,array);
+        viewPager.setAdapter(pagerAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

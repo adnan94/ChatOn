@@ -1,4 +1,4 @@
-package com.example.sarfraz.sarfarz;
+package com.example.sarfraz.sarfarz.Fragments;
 
 
 import android.os.Bundle;
@@ -7,14 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.sarfraz.sarfarz.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GroupFragment extends Fragment {
+public class StatusFragment extends Fragment {
 
 
-    public GroupFragment() {
+    public StatusFragment() {
         // Required empty public constructor
     }
 
@@ -23,8 +25,8 @@ public class GroupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_blank, container, false);
-   return v;
+        View view= inflater.inflate(R.layout.fragment_status, container, false);
+    return view;
     }
 
 }

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d9d9d9"
-    tools:context="com.example.sarfraz.sarfarz.StatusFragment"
+    tools:context="com.example.sarfraz.sarfarz.Fragments.StatusFragment"
     android:orientation="vertical"
     android:padding="10dp"
     >

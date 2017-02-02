@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context="com.example.sarfraz.sarfarz.GroupFragment">
+    android:background="#d9d9d9"
+    tools:context="com.example.sarfraz.sarfarz.Fragments.GroupFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
