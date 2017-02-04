@@ -11,7 +11,7 @@
         android:layout_height="100dp"
         android:text="@string/hello_blank_fragment"
         android:id="@+id/imageViewMyProfile"
-        android:src="@drawable/pic"
+        android:src="@drawable/ic_menu_gallery"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         />

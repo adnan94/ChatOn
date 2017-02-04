@@ -30,7 +30,7 @@ public class NavDrawerActivity extends AppCompatActivity
     FragmentManager manager;
     TabLayout tabLayout;
     ViewPager viewPager;
-String array []={"Conversations","Contacts","Groups"};
+String array []={"Conversation","Contacts","Groups"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,26 +114,26 @@ String array []={"Conversations","Contacts","Groups"};
             // Handle the camera action
             FragmentTransaction transaction=manager.beginTransaction();
             MyProfile profile=new MyProfile();
-            transaction.add(R.id.container,profile);
+            transaction.replace(R.id.container,profile);
             transaction.addToBackStack(null);
             transaction.commit();
 
         } else if (id == R.id.nav_group) {
             FragmentTransaction transaction=manager.beginTransaction();
             GroupFragment group=new GroupFragment();
-            transaction.add(R.id.container,group);
+            transaction.replace(R.id.container,group);
             transaction.addToBackStack(null);
             transaction.commit();
         } else if (id == R.id.nav_update_info) {
             FragmentTransaction mtransaction=manager.beginTransaction();
             UpdateInfo updateInfo=new UpdateInfo();
-            mtransaction.add(R.id.container,updateInfo);
+            mtransaction.replace(R.id.container,updateInfo);
             mtransaction.addToBackStack(null);
             mtransaction.commit();
         } else if (id == R.id.nav_status) {
             FragmentTransaction mtransaction=manager.beginTransaction();
             StatusFragment statusFragment=new StatusFragment();
-            mtransaction.add(R.id.container,statusFragment);
+            mtransaction.replace(R.id.container,statusFragment);
             mtransaction.addToBackStack(null);
             mtransaction.commit();
         }
