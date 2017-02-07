@@ -1,5 +1,6 @@
 package com.example.sarfraz.sarfarz.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,13 +25,15 @@ import com.example.sarfraz.sarfarz.Fragments.StatusFragment;
 import com.example.sarfraz.sarfarz.Fragments.UpdateInfo;
 import com.example.sarfraz.sarfarz.R;
 import com.example.sarfraz.sarfarz.pagerAdaptor;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FragmentManager manager;
     TabLayout tabLayout;
     ViewPager viewPager;
-String array []={"Conversation","Contacts","Groups"};
+public static  NavDrawerActivity context;
+    String array []={"Conversation","Contacts","Groups"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ String array []={"Conversation","Contacts","Groups"};
         setContentView(R.layout.activity_nav_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+       context=this;
         manager=getSupportFragmentManager();
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
         viewPager=(ViewPager)findViewById(R.id.viewPager);
@@ -136,7 +140,13 @@ String array []={"Conversation","Contacts","Groups"};
             mtransaction.replace(R.id.container,statusFragment);
             mtransaction.addToBackStack(null);
             mtransaction.commit();
+        }else if(id == R.id.logout){
+            FirebaseAuth.getInstance().signOut();
+            Intent i=new Intent(NavDrawerActivity.this,SignInActivity.class);
+            startActivity(i);
+
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

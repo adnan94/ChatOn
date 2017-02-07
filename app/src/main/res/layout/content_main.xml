@@ -8,8 +8,31 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/download"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.sarfraz.sarfarz.Activities.MainActivity"
+    tools:context="com.example.sarfraz.sarfarz.Activities.SplashScreenActivity"
     tools:showIn="@layout/activity_main">
 
+    <TextView
+        android:text="Chat On"
+        android:textStyle="bold"
+        android:textColor="#fa0000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
+        android:textSize="50dp"
+        />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="53dp"
+        android:layout_marginEnd="53dp"
+        android:id="@+id/progressBar3"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_alignEnd="@+id/textView3" />
 </RelativeLayout>

@@ -16,11 +16,13 @@
     android:layout_centerHorizontal="true"
     android:text="Sign Up"
     android:textSize="35dp"
-    android:textColor="#990099"
+    android:textColor="#4052b5"
     ></TextView>
 
     <Button
-        android:text="Button"
+        android:text="Submit"
+        android:background="#4052b5"
+        android:textColor="#fff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -31,7 +33,7 @@
         android:layout_alignParentEnd="true" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="first name"
@@ -42,12 +44,10 @@
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:ems="10"
         android:hint="last name"
-
         android:inputType="textPersonName"
         android:id="@+id/editText2"
         android:layout_below="@+id/editText"
@@ -55,7 +55,7 @@
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
         android:ems="10"
@@ -66,7 +66,7 @@
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
