@@ -1,5 +1,6 @@
 package com.example.sarfraz.sarfarz.Activities;
 
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,86 +24,96 @@ import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    EditText fname,lname,password,email;
-    DatabaseReference fire;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private FirebaseAuth mAuth;
+    EditText fname, lname, password, email;
     Button submit;
+    DatabaseReference fire;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        fname=(EditText)findViewById(R.id.editText);
-        lname=(EditText)findViewById(R.id.editText2);
-        email=(EditText)findViewById(R.id.editText4);
-        password=(EditText)findViewById(R.id.editText3);
-        submit=(Button) findViewById(R.id.button2);
-        fire=FirebaseDatabase.getInstance().getReference();
+        fire = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
+        fname = (EditText) findViewById(R.id.editText);
+        lname = (EditText) findViewById(R.id.editText2);
+        email = (EditText) findViewById(R.id.editText4);
+        password = (EditText) findViewById(R.id.editText3);
+        submit = (Button) findViewById(R.id.button2);
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    // User is signed in
                 } else {
-                    // User is signed out
                 }
                 // ...
             }
         };
-        submit.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        createAccount();
-//        .child("HelloWorld").setValue("Adnan Ahmed");
 
-    }
-});
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fname.getText().toString().equals("") || fname.getText().toString().equals("") || password.getText().toString().equals("") || email.getText().toString().equals("")) {
+                    Toast.makeText(SignUpActivity.this, "Plz Complete All Text Fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    createAccount();
+
+                }
+
+            }
+        });
 
     }
 
     public void createAccount() {
-        final String first=fname.getText().toString();
-        final String last=lname.getText().toString();
-        String pass=password.getText().toString();
-        final String emaill=email.getText().toString();
+        final String first = fname.getText().toString();
+        final String last = lname.getText().toString();
+        String pass = password.getText().toString();
+        final String emaill = email.getText().toString();
         mAuth.createUserWithEmailAndPassword(emaill, pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+//                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-
-                            Toast.makeText(SignUpActivity.this, "Failed"+task.getException(),
+                            Toast.makeText(SignUpActivity.this, "" + task.getException().toString(),
                                     Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(SignUpActivity.this, "Sucessful",
+                        } else {
+                            Toast.makeText(SignUpActivity.this, "Sucessfull",
                                     Toast.LENGTH_SHORT).show();
-                            Map<String ,String> map=new HashMap<String, String>();
-                            map.put("name",first+" "+last);
-                            map.put("picurl","N/A");
-                            map.put("email",emaill);
-                            map.put("status","N/A");
-                            map.put("contact","N/A");
-                            map.put("birthday","N/A");
+                            Map<String, String> map = new HashMap<String, String>();
+                            map.put("name", first + " " + last);
+                            map.put("picurl", "N/A");
+                            map.put("email", emaill);
+                            map.put("status", "N/A");
+                            map.put("contact", "N/A");
+                            map.put("birthday", "N/A");
 
-        fire.child("AppData").child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(map);
+                            fire.child("AppData").child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(map);
+                            fname.setText("");
+                            lname.setText("");
+                            password.setText("");
+                            email.setText("");
                         }
 
-                        // ...
                     }
                 });
 
+
     }
+
     @Override
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
+
     @Override
     public void onStop() {
         super.onStop();
