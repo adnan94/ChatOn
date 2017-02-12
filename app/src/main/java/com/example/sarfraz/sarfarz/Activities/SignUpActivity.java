@@ -1,5 +1,6 @@
 package com.example.sarfraz.sarfarz.Activities;
 
+import android.app.ProgressDialog;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -29,6 +31,7 @@ public class SignUpActivity extends AppCompatActivity {
     DatabaseReference fire;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,10 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         fire = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
+        pd=new ProgressDialog(this);
+        pd.setTitle("Plz Wait..");
+        pd.setMessage("Creating Your Account..");
+
         fname = (EditText) findViewById(R.id.editText);
         lname = (EditText) findViewById(R.id.editText2);
         email = (EditText) findViewById(R.id.editText4);
@@ -58,6 +65,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (fname.getText().toString().equals("") || fname.getText().toString().equals("") || password.getText().toString().equals("") || email.getText().toString().equals("")) {
                     Toast.makeText(SignUpActivity.this, "Plz Complete All Text Fields", Toast.LENGTH_SHORT).show();
                 } else {
+        pd.show();
                     createAccount();
 
                 }
@@ -85,8 +93,6 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(SignUpActivity.this, "" + task.getException().toString(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(SignUpActivity.this, "Sucessfull",
-                                    Toast.LENGTH_SHORT).show();
                             Map<String, String> map = new HashMap<String, String>();
                             map.put("name", first + " " + last);
                             map.put("picurl", "N/A");
@@ -95,7 +101,15 @@ public class SignUpActivity extends AppCompatActivity {
                             map.put("contact", "N/A");
                             map.put("birthday", "N/A");
 
-                            fire.child("AppData").child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(map);
+                            fire.child("AppData").child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(map, new DatabaseReference.CompletionListener() {
+                                @Override
+                                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                 pd.dismiss();
+                                    Toast.makeText(SignUpActivity.this, "Sucessfull",
+                                            Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
                             fname.setText("");
                             lname.setText("");
                             password.setText("");

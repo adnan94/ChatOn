@@ -1,5 +1,6 @@
 package com.example.sarfraz.sarfarz.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ public class SignInActivity extends AppCompatActivity {
     Button submit;
     TextView signUp;
     private FirebaseAuth mAuth;
+    ProgressDialog pd;
     //    EmailPasswordActivity.java
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -33,6 +35,9 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         mAuth=FirebaseAuth.getInstance();
+        pd=new ProgressDialog(this);
+        pd.setMessage("Signing In..");
+        pd.setTitle("Plz Wait..");
         if (NavDrawerActivity.context != null) {
             NavDrawerActivity.context.finish();
         } else {
@@ -71,8 +76,10 @@ public class SignInActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               pd.show();
                 if (email.getText().toString().equals("") || password.getText().toString().equals("")) {
                     Toast.makeText(SignInActivity.this, "Plz Complete All Text Fields", Toast.LENGTH_SHORT).show();
+               pd.dismiss();
                 } else {
                     signIn(email.getText().toString(), password.getText().toString());
 
@@ -93,9 +100,12 @@ public class SignInActivity extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
 //                            Log.w(TAG, "signInWithEmail:failed", task.getException());
+                            pd.dismiss();
                             Toast.makeText(SignInActivity.this, task.getException().toString(),
                                     Toast.LENGTH_SHORT).show();
+
                         } else {
+                            pd.dismiss();
                             Toast.makeText(SignInActivity.this, "Sucessfull",
                                     Toast.LENGTH_SHORT).show();
                         }

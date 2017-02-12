@@ -1,4 +1,4 @@
-package com.example.sarfraz.sarfarz;
+package com.example.sarfraz.sarfarz.Adaptors;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
