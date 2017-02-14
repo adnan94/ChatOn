@@ -29,7 +29,7 @@ public class AllUser extends Fragment {
     ArrayList<user> list;
     ConversationAdaptor adaptor;
 
-    public AllUser() {
+    public AllUser(){
         // Required empty public constructor
     }
 

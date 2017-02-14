@@ -19,17 +19,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GroupsListFragment extends Fragment {
-ListView listView;
-ArrayList<Group> list;
+public class AllGroups extends Fragment {
+
+    ListView listView;
+    ArrayList<Group> list;
     MyGroupListAdaptor adaptor;
     DatabaseReference firebase;
-    public GroupsListFragment() {
+
+    public AllGroups() {
         // Required empty public constructor
     }
 
@@ -38,25 +39,24 @@ ArrayList<Group> list;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_groups_list, container, false);
-   firebase= FirebaseDatabase.getInstance().getReference();
-        listView=(ListView)v.findViewById(R.id.myGroupList);
+        View v=inflater.inflate(R.layout.fragment_all_groups, container, false);
+        firebase= FirebaseDatabase.getInstance().getReference();
+        listView=(ListView)v.findViewById(R.id.allGroups);
         list=new ArrayList<>();
         adaptor=new MyGroupListAdaptor(list,getActivity());
         listView.setAdapter(adaptor);
 
 
-
-        firebase.child("AppData").child("Groups").child("MyGroup").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        firebase.child("AppData").child("Groups").child("GroupList").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-for(DataSnapshot d:dataSnapshot.getChildren())
-{
-    Group group=d.getValue(Group.class);
-    list.add(group);
-    adaptor.notifyDataSetChanged();
+                for(DataSnapshot d:dataSnapshot.getChildren())
+                {
+                    Group group=d.getValue(Group.class);
+                    list.add(group);
+                    adaptor.notifyDataSetChanged();
 
-}
+                }
 //         String name=dataSnapshot.child("name").getValue().toString();
 //                String admin=dataSnapshot.child("admin").getValue().toString();
 //                String picurl=dataSnapshot.child("picurl").getValue().toString();
@@ -69,8 +69,8 @@ for(DataSnapshot d:dataSnapshot.getChildren())
         });
 
 
+
         return v;
     }
-
 
 }

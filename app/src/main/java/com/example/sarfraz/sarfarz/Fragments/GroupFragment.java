@@ -54,7 +54,7 @@ Button createGroup;
                }else{
                    Map<String,String> map=new HashMap<String, String>();
                    map.put("name",name.getText().toString());
-                   map.put("picurl", Utils.picurl);
+                   map.put("picurl", "N/A");
                    map.put("admin",Utils.name);
                    fire.child("AppData").child("Groups").child("GroupList").child(name.getText().toString()).setValue(map);
                    fire.child("AppData").child("Groups").child("MyGroup").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(name.getText().toString()).setValue(map, new DatabaseReference.CompletionListener() {

@@ -3,15 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d9d9d9"
-    tools:context="com.example.sarfraz.sarfarz.Fragments.GroupsListFragment">
+    tools:context="com.example.sarfraz.sarfarz.Fragments.AllGroups">
 
     <!-- TODO: Update blank fragment layout -->
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/myGroupList"
-        >
-
-    </ListView>
-
+<ListView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/allGroups"
+    ></ListView>
 </FrameLayout>

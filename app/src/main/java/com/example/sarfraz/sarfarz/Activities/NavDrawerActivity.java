@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sarfraz.sarfarz.Fragments.AllGroups;
 import com.example.sarfraz.sarfarz.Fragments.AllUser;
 import com.example.sarfraz.sarfarz.Fragments.GroupFragment;
 import com.example.sarfraz.sarfarz.Fragments.MyProfile;
@@ -72,9 +73,10 @@ public class NavDrawerActivity extends AppCompatActivity
         setContentView(R.layout.activity_nav_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
         context = this;
         fire = FirebaseDatabase.getInstance().getReference();
-
         storegeRef = FirebaseStorage.getInstance().getReference();
         getUserData();
 //        setNav();
@@ -309,6 +311,20 @@ public class NavDrawerActivity extends AppCompatActivity
             Intent i = new Intent(NavDrawerActivity.this, SignInActivity.class);
             startActivity(i);
 
+        } else if (id == R.id.nav_allGroups) {
+            FragmentTransaction mtransaction = manager.beginTransaction();
+            AllGroups allGroups= new AllGroups();
+            mtransaction.replace(R.id.container, allGroups);
+            mtransaction.addToBackStack(null);
+            mtransaction.commit();
+
+        } else if (id == R.id.nav_requests) {
+
+            FragmentTransaction mtransaction = manager.beginTransaction();
+            StatusFragment statusFragment = new StatusFragment();
+            mtransaction.replace(R.id.container, statusFragment);
+            mtransaction.addToBackStack(null);
+            mtransaction.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

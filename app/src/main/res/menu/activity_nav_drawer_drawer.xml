@@ -18,6 +18,14 @@
             android:id="@+id/nav_status"
             android:icon="@drawable/ic_menu_manage"
             android:title="Update Status" />
+        <item
+            android:id="@+id/nav_allGroups"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="All Groups" />
+        <item
+            android:id="@+id/nav_requests"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Friend Requests" />
     </group>
 
     <item android:title="Project">
