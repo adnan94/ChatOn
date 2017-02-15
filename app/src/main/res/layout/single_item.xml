@@ -16,7 +16,7 @@
         android:id="@+id/textViewSingleItem" />
 
     <TextView
-        android:text="Adnan Ahmed"
+        android:text="Elips User"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewNameSingleItem"

@@ -27,8 +27,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sarfraz.sarfarz.Adaptors.FriendRequestAdaptor;
 import com.example.sarfraz.sarfarz.Fragments.AllGroups;
 import com.example.sarfraz.sarfarz.Fragments.AllUser;
+import com.example.sarfraz.sarfarz.Fragments.Friend_Request_Fragment;
 import com.example.sarfraz.sarfarz.Fragments.GroupFragment;
 import com.example.sarfraz.sarfarz.Fragments.MyProfile;
 import com.example.sarfraz.sarfarz.Fragments.StatusFragment;
@@ -108,6 +110,7 @@ public class NavDrawerActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        Utils.uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
     @Override
@@ -321,8 +324,8 @@ public class NavDrawerActivity extends AppCompatActivity
         } else if (id == R.id.nav_requests) {
 
             FragmentTransaction mtransaction = manager.beginTransaction();
-            StatusFragment statusFragment = new StatusFragment();
-            mtransaction.replace(R.id.container, statusFragment);
+            Friend_Request_Fragment requestFragment = new Friend_Request_Fragment();
+            mtransaction.replace(R.id.container, requestFragment);
             mtransaction.addToBackStack(null);
             mtransaction.commit();
         }
