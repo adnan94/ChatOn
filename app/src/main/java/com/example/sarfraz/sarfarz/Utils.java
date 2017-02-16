@@ -12,4 +12,6 @@ public class Utils {
     public static String status;
     public static String uid;
     public static String contact;
+    public static String groupName;
+
 }
