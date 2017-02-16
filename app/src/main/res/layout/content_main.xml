@@ -8,42 +8,36 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#d9d9d9"
+    android:background="@drawable/cc"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.sarfraz.sarfarz.Activities.SplashScreenActivity"
     tools:showIn="@layout/activity_main">
 
-    <ProgressBar
-        style="?android:attr/progressBarStyle"
+    <TextView
+        android:text="Chat On"
+        android:textStyle="bold"
+        android:textColor="#000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="53dp"
-        android:layout_marginEnd="53dp"
-        android:id="@+id/progressBar3"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_alignEnd="@+id/textView3" />
+        android:id="@+id/textView3"
+        android:textSize="50dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:text="Instant Chatting App"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView4"
-        android:layout_marginRight="14dp"
-        android:layout_marginEnd="14dp"
-        android:layout_below="@+id/textView3"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_alignEnd="@+id/textView3" />
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:text="Chat On"
-        android:textStyle="bold"
-        android:textColor="#3f51b4"
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:textSize="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="74dp" />
+        android:id="@+id/progressBar3"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
