@@ -1,12 +1,16 @@
 package com.example.sarfraz.sarfarz.Fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.sarfraz.sarfarz.Adaptors.FriendRequestAdaptor;
 import com.example.sarfraz.sarfarz.R;
@@ -66,7 +70,36 @@ public class Friend_Request_Fragment extends Fragment {
             }
         });
 
+listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        alert.setPositiveButton("Add As Friend", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                fire.child("AppData").child("Friends").child(Utils.uid).child(list.get(position).getId()).setValue(new signature_friend_req(list.get(position).getName(),list.get(position).getId(),list.get(position).getPicurl()));
+                fire.child("AppData").child("Friends").child(list.get(position).getId()).child(Utils.uid).setValue(new signature_friend_req(Utils.name,list.get(position).getId(),list.get(position).getPicurl()));
+
+
+            }
+        });
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+            }
+        });
+        alert.setTitle("Freind Request");
+        alert.setMessage("Are you sure you want to Add ?");
+        AlertDialog ad = alert.create();
+
+        alert.show();
+
+
+    }
+});
         return v;
     }
 

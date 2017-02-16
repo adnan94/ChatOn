@@ -122,7 +122,7 @@ public class AllUser extends Fragment {
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+//                        dialog.dismiss();
                     }
                 });
                 alert.setTitle("Freind Request");
