@@ -52,9 +52,6 @@ public class AllGroups extends Fragment {
         listView=(ListView)v.findViewById(R.id.allGroups);
         list=new ArrayList<>();
         adaptor=new MyGroupListAdaptor(list,getActivity());
-        listView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
-        listView.setStackFromBottom(true);
-        listView.setAdapter(adaptor);
 
 
         firebase.child("AppData").child("Groups").child("GroupList").addListenerForSingleValueEvent(new ValueEventListener() {

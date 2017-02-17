@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -56,6 +57,9 @@ listView=(ListView)v.findViewById(R.id.listViewGroupChat);
 adaptor=new chatAdaptor(list,getActivity());
 
 listView.setAdapter(adaptor);
+        listView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
+        listView.setStackFromBottom(true);
+        listView.setAdapter(adaptor);
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
