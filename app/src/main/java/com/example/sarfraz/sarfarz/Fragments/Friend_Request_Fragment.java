@@ -80,7 +80,8 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onClick(DialogInterface dialog, int which) {
 
                 fire.child("AppData").child("Friends").child(Utils.uid).child(list.get(position).getId()).setValue(new signature_friend_req(list.get(position).getName(),list.get(position).getId(),list.get(position).getPicurl()));
-                fire.child("AppData").child("Friends").child(list.get(position).getId()).child(Utils.uid).setValue(new signature_friend_req(Utils.name,list.get(position).getId(),list.get(position).getPicurl()));
+                fire.child("AppData").child("Friends").child(list.get(position).getId()).child(Utils.uid).setValue(new signature_friend_req(Utils.name,list.get(position).getId(),Utils.picurl));
+                ////////////////////////////
 
 
             }
