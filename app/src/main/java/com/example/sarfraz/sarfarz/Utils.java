@@ -13,5 +13,6 @@ public class Utils {
     public static String uid;
     public static String contact;
     public static String groupName;
+    public static String pid;
 
 }

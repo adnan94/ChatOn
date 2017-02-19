@@ -1,5 +1,6 @@
 package com.example.sarfraz.sarfarz.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -8,26 +9,25 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sarfraz.sarfarz.Adaptors.FriendRequestAdaptor;
+import com.example.sarfraz.sarfarz.Adaptors.pagerAdaptor;
 import com.example.sarfraz.sarfarz.Fragments.AllGroups;
 import com.example.sarfraz.sarfarz.Fragments.AllUser;
 import com.example.sarfraz.sarfarz.Fragments.Friend_Request_Fragment;
@@ -37,7 +37,6 @@ import com.example.sarfraz.sarfarz.Fragments.StatusFragment;
 import com.example.sarfraz.sarfarz.Fragments.UpdateInfo;
 import com.example.sarfraz.sarfarz.R;
 import com.example.sarfraz.sarfarz.Utils;
-import com.example.sarfraz.sarfarz.Adaptors.pagerAdaptor;
 import com.example.sarfraz.sarfarz.user;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -65,6 +64,7 @@ public class NavDrawerActivity extends AppCompatActivity
     DatabaseReference fire;
     StorageReference storegeRef,imgRef;
     ImageView iv;
+ProgressDialog pd;
 
     public static NavDrawerActivity context;
     String array[] = {"Conversation", "Contacts", "Groups"};
@@ -76,7 +76,9 @@ public class NavDrawerActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+pd=new ProgressDialog(this);
+        pd.setTitle("Uploading");
+        pd.setMessage("Wait While Uploading !");
         context = this;
         fire = FirebaseDatabase.getInstance().getReference();
         storegeRef = FirebaseStorage.getInstance().getReference();
@@ -168,7 +170,7 @@ public class NavDrawerActivity extends AppCompatActivity
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(NavDrawerActivity.this,"hello !",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(NavDrawerActivity.this,"hello !",Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, 0);
             }
@@ -183,6 +185,7 @@ public class NavDrawerActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     if(requestCode == 0 && data != null ){
+       pd.show();
         String path = getRealPathFromURI(data.getData());
         getImage(path,data);
     }
@@ -216,6 +219,7 @@ public class NavDrawerActivity extends AppCompatActivity
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Toast.makeText(NavDrawerActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+               pd.dismiss();
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("name",Utils.name);
                 map.put("picurl",taskSnapshot.getDownloadUrl().toString());
@@ -244,6 +248,8 @@ public class NavDrawerActivity extends AppCompatActivity
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                pd.dismiss();
+
                 Toast.makeText(NavDrawerActivity.this, "Uploading Failed"+e.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.d("TAG", e.getMessage().toString());
             }

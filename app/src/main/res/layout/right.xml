@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="150dp"
         android:layout_height="70dp"
-        android:background="#f74f4f"
+        android:background="@drawable/corner_right"
         android:padding="8dp"
 android:gravity="right"
         android:layout_marginRight="15dp"
