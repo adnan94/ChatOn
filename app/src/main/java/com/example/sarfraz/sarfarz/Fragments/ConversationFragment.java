@@ -1,6 +1,8 @@
 package com.example.sarfraz.sarfarz.Fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -97,6 +99,55 @@ listIds=new ArrayList<>();
                 mtransaction.commit();
             }
         });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(final AdapterView<?> parent, View view, final int position, long id) {
+                final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setPositiveButton("UnFriend", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        fire.child("AppData").child("Friends").child(Utils.uid).addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+                            @Override
+                            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                                int i = 0;
+                                for (com.google.firebase.database.DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                    dataSnapshot1.child(Utils.uid).child(list.get(position).getId()).getRef().removeValue();
+                                    dataSnapshot1.child(list.get(position).getId()).child(Utils.uid).getRef().removeValue();
+
+                                    list.remove(position);
+                                    ContactsFragment.list.remove(position);
+                                    ContactsFragment.adaptor.notifyDataSetChanged();
+                                    adaptor.notifyDataSetChanged();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+                    }
+                });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+                    }
+                });
+                alert.setTitle("Freind Request");
+                alert.setMessage("Are you sure you want to Add ?");
+                AlertDialog ad = alert.create();
+
+                alert.show();
+
+                return false;
+            }
+        });
+
         return v;
     }
 

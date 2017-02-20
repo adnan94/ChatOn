@@ -3,9 +3,11 @@ package com.example.sarfraz.sarfarz.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,8 +29,8 @@ import java.util.ArrayList;
 public class ContactsFragment extends Fragment {
     ListView listView;
     DatabaseReference fire;
-    ArrayList<signature_friend_req> list;
-    FriendRequestAdaptor adaptor;
+    public static ArrayList<signature_friend_req> list;
+    public static FriendRequestAdaptor adaptor;
     TextView textView;
 
 
@@ -77,6 +79,18 @@ public class ContactsFragment extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+               Utils.tempFriendUid=list.get(position).getId();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                FriendProfile profile = new FriendProfile();
+                transaction.replace(R.id.container, profile);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
         return v;

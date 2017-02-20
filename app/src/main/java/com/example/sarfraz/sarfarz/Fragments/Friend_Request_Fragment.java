@@ -86,6 +86,29 @@ listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 fire.child("AppData").child("Friends").child(Utils.uid).child(list.get(position).getId()).setValue(new signature_friend_req(list.get(position).getName(),list.get(position).getId(),list.get(position).getPicurl()));
                 fire.child("AppData").child("Friends").child(list.get(position).getId()).child(Utils.uid).setValue(new signature_friend_req(Utils.name,list.get(position).getId(),Utils.picurl));
                 ////////////////////////////
+                fire.child("AppData").child("FriendRequest").child(Utils.uid).addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+                    @Override
+                    public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                        int i = 0;
+                        for (com.google.firebase.database.DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
+                            if (i == position) {
+                                DatabaseReference ref = dataSnapshot1.getRef();
+                                ref.removeValue();
+                                list.remove(position);
+
+                                adaptor.notifyDataSetChanged();
+                            } else {
+                                i++;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
 
             }

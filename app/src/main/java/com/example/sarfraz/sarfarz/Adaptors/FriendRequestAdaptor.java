@@ -55,7 +55,7 @@ public class FriendRequestAdaptor extends BaseAdapter {
         Picasso.with(context).load(list.get(position).getPicurl()).placeholder(R.drawable.user).into(iv);
 
         name.setText(list.get(position).getName());
-        admin.setText("");
+//        admin.setText("Availa");
         return v;
     }
 

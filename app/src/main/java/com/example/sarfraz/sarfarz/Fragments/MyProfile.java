@@ -6,10 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sarfraz.sarfarz.R;
 import com.example.sarfraz.sarfarz.Utils;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -19,7 +21,7 @@ import org.w3c.dom.Text;
  */
 public class MyProfile extends Fragment {
 TextView name,email,status,birthday,contact;
-
+ImageView imageViewMyProfile;
     public MyProfile() {
         // Required empty public constructor
     }
@@ -35,6 +37,8 @@ TextView name,email,status,birthday,contact;
         status=(TextView)view.findViewById(R.id.textViewStatusMyProfile);
         birthday=(TextView)view.findViewById(R.id.textViewBirthdayMyProfile);
         contact=(TextView)view.findViewById(R.id.textViewContact);
+        contact=(TextView)view.findViewById(R.id.textViewContact);
+        imageViewMyProfile=(ImageView)view.findViewById(R.id.imageViewMyProfile);
 
         name.setText(Utils.name);
         email.setText(Utils.email);
@@ -42,8 +46,10 @@ TextView name,email,status,birthday,contact;
         birthday.setText(Utils.birthday);
         contact.setText(Utils.contact);
 
+        Picasso.with(getActivity()).load(Utils.picurl).placeholder(R.drawable.user).into(imageViewMyProfile);
 
-    return view;
+
+        return view;
     }
 
 }
