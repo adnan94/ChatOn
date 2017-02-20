@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sarfraz.sarfarz.R;
@@ -43,8 +44,7 @@ Button createGroup;
 String url="";
     DatabaseReference fire;
     StorageReference storegeRef,imgRef;
-
-    Button upload;
+   Button upload;
     ProgressDialog pd;
 
     public GroupFragment() {
@@ -57,6 +57,7 @@ String url="";
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_blank, container, false);
+
         fire= FirebaseDatabase.getInstance().getReference();
         createGroup=(Button)v.findViewById(R.id.buttonCreateGroupScreen);
         name=(EditText)v.findViewById(R.id.editTextGroupScreen);

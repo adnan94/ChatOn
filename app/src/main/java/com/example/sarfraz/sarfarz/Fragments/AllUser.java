@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sarfraz.sarfarz.Adaptors.ConversationAdaptor;
@@ -39,6 +40,7 @@ public class AllUser extends Fragment {
     ArrayList<user> list;
     ArrayList<String> arrayList;
     ConversationAdaptor adaptor;
+    TextView textView;
 
     public AllUser() {
         // Required empty public constructor
@@ -50,6 +52,8 @@ public class AllUser extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_all_user, container, false);
+        textView=(TextView)v.findViewById(R.id.placeHolderAllUsers);
+
         list = new ArrayList<user>();
         adaptor = new ConversationAdaptor(list, getActivity());
         arrayList = new ArrayList<>();
@@ -64,6 +68,7 @@ public class AllUser extends Fragment {
         databaseReference.child("AppData").child("Users").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                textView.setVisibility(View.GONE);
                 String str = dataSnapshot.getKey().toString();
 //               Log.d("ssssss",str);
                 arrayList.add(str);

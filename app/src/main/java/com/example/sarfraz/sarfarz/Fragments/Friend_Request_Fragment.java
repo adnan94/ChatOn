@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sarfraz.sarfarz.Adaptors.FriendRequestAdaptor;
@@ -34,7 +35,7 @@ public class Friend_Request_Fragment extends Fragment {
     DatabaseReference fire;
     ArrayList<signature_friend_req> list;
     FriendRequestAdaptor adaptor;
-
+TextView textView;
 
     public Friend_Request_Fragment() {
         // Required empty public constructor
@@ -45,9 +46,11 @@ public class Friend_Request_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         fire = FirebaseDatabase.getInstance().getReference();
         list = new ArrayList<>();
         View v = inflater.inflate(R.layout.fragment_friend__request_, container, false);
+        textView=(TextView)v.findViewById(R.id.placeHolderFriendRequests);
         listView = (ListView) v.findViewById(R.id.listViewRequestScreen);
         adaptor = new FriendRequestAdaptor(list, getActivity());
         listView.setAdapter(adaptor);
@@ -55,6 +58,7 @@ public class Friend_Request_Fragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
              for(DataSnapshot d:dataSnapshot.getChildren()){
+                textView.setVisibility(View.GONE);
                  signature_friend_req signature_friend_req = d.getValue(com.example.sarfraz.sarfarz.signature_friend_req.class);
                  list.add(signature_friend_req);
                  adaptor.notifyDataSetChanged();

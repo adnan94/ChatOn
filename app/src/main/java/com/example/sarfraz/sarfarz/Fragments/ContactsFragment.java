@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.sarfraz.sarfarz.Adaptors.FriendRequestAdaptor;
 import com.example.sarfraz.sarfarz.R;
@@ -28,6 +29,7 @@ public class ContactsFragment extends Fragment {
     DatabaseReference fire;
     ArrayList<signature_friend_req> list;
     FriendRequestAdaptor adaptor;
+    TextView textView;
 
 
     public ContactsFragment() {
@@ -39,6 +41,7 @@ public class ContactsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_contacts, container, false);
+        textView=(TextView)v.findViewById(R.id.placeHolderAllContacts);
 
         fire = FirebaseDatabase.getInstance().getReference();
         list = new ArrayList<>();
@@ -49,6 +52,7 @@ public class ContactsFragment extends Fragment {
         fire.child("AppData").child("Friends").child(Utils.uid).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                textView.setVisibility(View.GONE);
                 signature_friend_req signature_friend_req = dataSnapshot.getValue(com.example.sarfraz.sarfarz.signature_friend_req.class);
                 list.add(signature_friend_req);
                 adaptor.notifyDataSetChanged();

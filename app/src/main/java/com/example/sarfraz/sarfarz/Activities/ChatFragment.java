@@ -11,6 +11,7 @@ import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.sarfraz.sarfarz.Adaptors.chatAdaptor;
 import com.example.sarfraz.sarfarz.R;
@@ -34,8 +35,7 @@ public class ChatFragment extends Fragment {
     DatabaseReference fire;
     ArrayList<chat> list;
     chatAdaptor adaptor;
-
-
+    TextView textViewNav;
 
     public ChatFragment() {
         // Required empty public constructor
@@ -45,15 +45,17 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v= inflater.inflate(R.layout.fragment_group_chat, container, false);
-        fire= FirebaseDatabase.getInstance().getReference();
-        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        fab.setVisibility(View.GONE);
-        list=new ArrayList<>();
-        listView=(ListView)v.findViewById(R.id.listViewGroupChat);
-        message=(EditText)v.findViewById(R.id.editTextGroupSent);
-        imageButton=(ImageButton)v.findViewById(R.id.imageButtonGroupSent);
-        adaptor=new chatAdaptor(list,getActivity());
+        View v = inflater.inflate(R.layout.fragment_group_chat, container, false);
+        fire = FirebaseDatabase.getInstance().getReference();
+//        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+//        fab.setVisibility(View.GONE);
+        textViewNav = (TextView) getActivity().findViewById(R.id.textViewNav);
+        textViewNav.setText(Utils.tempName);
+        list = new ArrayList<>();
+        listView = (ListView) v.findViewById(R.id.listViewGroupChat);
+        message = (EditText) v.findViewById(R.id.editTextGroupSent);
+        imageButton = (ImageButton) v.findViewById(R.id.imageButtonGroupSent);
+        adaptor = new chatAdaptor(list, getActivity());
 
         listView.setAdapter(adaptor);
         listView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
@@ -63,8 +65,8 @@ public class ChatFragment extends Fragment {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fire.child("AppData").child("Conversations").child("OneToOne").child(Utils.uid).child(Utils.pid).push().setValue(new chat(Utils.name,Utils.picurl,Utils.uid,"message",message.getText().toString()));
-                fire.child("AppData").child("Conversations").child("OneToOne").child(Utils.pid).child(Utils.uid).push().setValue(new chat(Utils.name,Utils.picurl,Utils.uid,"message",message.getText().toString()));
+                fire.child("AppData").child("Conversations").child("OneToOne").child(Utils.uid).child(Utils.pid).push().setValue(new chat(Utils.name, Utils.picurl, Utils.uid, "message", message.getText().toString()));
+                fire.child("AppData").child("Conversations").child("OneToOne").child(Utils.pid).child(Utils.uid).push().setValue(new chat(Utils.name, Utils.picurl, Utils.uid, "message", message.getText().toString()));
 
                 message.setText("");
             }
@@ -75,15 +77,15 @@ public class ChatFragment extends Fragment {
 //
 
 
-
         return v;
 
     }
-    public void getConversation(){
+
+    public void getConversation() {
         fire.child("AppData").child("Conversations").child("OneToOne").child(Utils.uid).child(Utils.pid).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                chat c=dataSnapshot.getValue(chat.class);
+                chat c = dataSnapshot.getValue(chat.class);
                 list.add(c);
                 adaptor.notifyDataSetChanged();
 
@@ -111,4 +113,9 @@ public class ChatFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onDestroy() {
+        textViewNav.setText(Utils.name);
+        super.onDestroy();
+    }
 }

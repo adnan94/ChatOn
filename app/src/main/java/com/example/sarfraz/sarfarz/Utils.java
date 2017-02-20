@@ -14,5 +14,6 @@ public class Utils {
     public static String contact;
     public static String groupName;
     public static String pid;
-
+    public static String tempName;
+    public static String tempGroupName;
 }

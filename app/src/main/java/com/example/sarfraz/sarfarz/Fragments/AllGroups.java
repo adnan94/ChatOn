@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.sarfraz.sarfarz.Group;
 import com.example.sarfraz.sarfarz.MyGroupListAdaptor;
@@ -37,7 +38,7 @@ public class AllGroups extends Fragment {
     ArrayList<Group> list;
     MyGroupListAdaptor adaptor;
     DatabaseReference firebase;
-
+TextView textView;
     public AllGroups() {
         // Required empty public constructor
     }
@@ -48,17 +49,19 @@ public class AllGroups extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_all_groups, container, false);
+        textView=(TextView)v.findViewById(R.id.placeHolderAllGroups);
         firebase= FirebaseDatabase.getInstance().getReference();
         listView=(ListView)v.findViewById(R.id.allGroups);
         list=new ArrayList<>();
         adaptor=new MyGroupListAdaptor(list,getActivity());
-
+listView.setAdapter(adaptor);
 
         firebase.child("AppData").child("Groups").child("GroupList").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot d:dataSnapshot.getChildren())
                 {
+                    textView.setVisibility(View.GONE);
                     Group group=d.getValue(Group.class);
                     list.add(group);
                     adaptor.notifyDataSetChanged();

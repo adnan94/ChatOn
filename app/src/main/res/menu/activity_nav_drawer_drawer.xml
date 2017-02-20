@@ -26,6 +26,11 @@
             android:id="@+id/nav_requests"
             android:icon="@drawable/ic_menu_manage"
             android:title="Friend Requests" />
+        android:title="All Groups" />
+        <item
+            android:id="@+id/nav_users"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="All User" />
     </group>
 
     <item android:title="Project">

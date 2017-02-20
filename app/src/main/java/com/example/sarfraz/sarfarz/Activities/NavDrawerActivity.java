@@ -62,10 +62,10 @@ public class NavDrawerActivity extends AppCompatActivity
     TabLayout tabLayout;
     ViewPager viewPager;
     DatabaseReference fire;
-    StorageReference storegeRef,imgRef;
+    StorageReference storegeRef, imgRef;
     ImageView iv;
-ProgressDialog pd;
-
+    ProgressDialog pd;
+    TextView textView;
     public static NavDrawerActivity context;
     String array[] = {"Conversation", "Contacts", "Groups"};
 
@@ -76,7 +76,7 @@ ProgressDialog pd;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-pd=new ProgressDialog(this);
+        pd = new ProgressDialog(this);
         pd.setTitle("Uploading");
         pd.setMessage("Wait While Uploading !");
         context = this;
@@ -92,27 +92,16 @@ pd=new ProgressDialog(this);
         pagerAdaptor pagerAdapter = new pagerAdaptor(manager, array);
         viewPager.setAdapter(pagerAdapter);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction mtransaction = manager.beginTransaction();
-                AllUser userAll = new AllUser();
-                mtransaction.replace(R.id.container, userAll);
-                mtransaction.addToBackStack(null);
-                mtransaction.commit();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
+        textView = (TextView) findViewById(R.id.textViewNav);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        Utils.uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Utils.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
     @Override
@@ -147,7 +136,8 @@ pd=new ProgressDialog(this);
                 Utils.email = u.getEmail();
                 Utils.status = u.getStatus();
                 Utils.picurl = u.getPicurl();
-                setNav(u.getName(), u.getEmail(),u.getPicurl());
+                setNav(u.getName(), u.getEmail(), u.getPicurl());
+                textView.setText(Utils.name);
 
             }
 
@@ -160,7 +150,7 @@ pd=new ProgressDialog(this);
     }
 
 
-    public void setNav(String name, String email,String url) {
+    public void setNav(String name, String email, String url) {
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View header = navigationView.getHeaderView(0);
@@ -184,11 +174,11 @@ pd=new ProgressDialog(this);
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-    if(requestCode == 0 && data != null ){
-       pd.show();
-        String path = getRealPathFromURI(data.getData());
-        getImage(path,data);
-    }
+        if (requestCode == 0 && data != null) {
+            pd.show();
+            String path = getRealPathFromURI(data.getData());
+            getImage(path, data);
+        }
 
     }
 
@@ -205,12 +195,13 @@ pd=new ProgressDialog(this);
         }
         return result;
     }
+
     public void getImage(String path, final Intent data) {
         Uri file = Uri.fromFile(new File(path));
         Log.d("TAG", file.toString());
 
 //        StorageReference riversRef = storegeRef.child("image/");
-        File f=new File(path);
+        File f = new File(path);
 
         imgRef = storegeRef.child("imageOnly").child(f.getName());
 
@@ -219,10 +210,10 @@ pd=new ProgressDialog(this);
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Toast.makeText(NavDrawerActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
-               pd.dismiss();
+                pd.dismiss();
                 Map<String, String> map = new HashMap<String, String>();
-                map.put("name",Utils.name);
-                map.put("picurl",taskSnapshot.getDownloadUrl().toString());
+                map.put("name", Utils.name);
+                map.put("picurl", taskSnapshot.getDownloadUrl().toString());
                 map.put("email", Utils.email);
                 map.put("status", Utils.status);
                 map.put("contact", Utils.contact);
@@ -237,9 +228,9 @@ pd=new ProgressDialog(this);
 
                     }
                 });
-                try{
-                Bitmap ii = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-                iv.setImageBitmap(ii);
+                try {
+                    Bitmap ii = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
+                    iv.setImageBitmap(ii);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -250,15 +241,12 @@ pd=new ProgressDialog(this);
             public void onFailure(@NonNull Exception e) {
                 pd.dismiss();
 
-                Toast.makeText(NavDrawerActivity.this, "Uploading Failed"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(NavDrawerActivity.this, "Uploading Failed" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.d("TAG", e.getMessage().toString());
             }
         });
 
     }
-
-
-
 
 
     @Override
@@ -322,7 +310,7 @@ pd=new ProgressDialog(this);
 
         } else if (id == R.id.nav_allGroups) {
             FragmentTransaction mtransaction = manager.beginTransaction();
-            AllGroups allGroups= new AllGroups();
+            AllGroups allGroups = new AllGroups();
             mtransaction.replace(R.id.container, allGroups);
             mtransaction.addToBackStack(null);
             mtransaction.commit();
@@ -334,8 +322,14 @@ pd=new ProgressDialog(this);
             mtransaction.replace(R.id.container, requestFragment);
             mtransaction.addToBackStack(null);
             mtransaction.commit();
-        }
+        } else if (id == R.id.nav_users) {
+            FragmentTransaction mtransaction = manager.beginTransaction();
+            AllUser userAll = new AllUser();
+            mtransaction.replace(R.id.container, userAll);
+            mtransaction.addToBackStack(null);
+            mtransaction.commit();
 
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

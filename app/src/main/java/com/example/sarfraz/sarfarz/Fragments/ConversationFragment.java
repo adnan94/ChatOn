@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.sarfraz.sarfarz.Activities.ChatFragment;
 import com.example.sarfraz.sarfarz.Adaptors.FriendRequestAdaptor;
@@ -32,7 +33,7 @@ public class ConversationFragment extends Fragment {
     ArrayList<signature_friend_req> list;
     FriendRequestAdaptor adaptor;
 ArrayList<String> listIds;
-
+TextView textView;
     public ConversationFragment() {
         // Required empty public constructor
     }
@@ -44,6 +45,7 @@ ArrayList<String> listIds;
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_conversation, container, false);
 listIds=new ArrayList<>();
+        textView=(TextView)v.findViewById(R.id.placeHolderAllConversation);
         fire = FirebaseDatabase.getInstance().getReference();
         //////////////////////////////////////////////////
         list = new ArrayList<>();
@@ -54,6 +56,7 @@ listIds=new ArrayList<>();
         fire.child("AppData").child("Friends").child(Utils.uid).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+               textView.setVisibility(View.GONE);
                 signature_friend_req signature_friend_req = dataSnapshot.getValue(com.example.sarfraz.sarfarz.signature_friend_req.class);
                 list.add(signature_friend_req);
                 listIds.add(dataSnapshot.getKey());
@@ -86,6 +89,7 @@ listIds=new ArrayList<>();
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //////////////////////////////////////////
                 Utils.pid=listIds.get(position);
+                Utils.tempName=list.get(position).getName();
                 FragmentTransaction mtransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 ChatFragment chatFragment = new ChatFragment();
                 mtransaction.replace(R.id.container, chatFragment);
