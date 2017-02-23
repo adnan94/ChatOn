@@ -11,10 +11,8 @@ import android.widget.TextView;
 import com.example.sarfraz.sarfarz.R;
 import com.example.sarfraz.sarfarz.Utils;
 import com.example.sarfraz.sarfarz.user;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
@@ -46,8 +44,8 @@ imageViewMyProfile=(ImageView)view.findViewById(R.id.imageViewMyProfile);
         FirebaseDatabase.getInstance().getReference().child("AppData").child("Users").child(Utils.tempFriendUid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot d:dataSnapshot.getChildren()){
-                    user u=d.getValue(user.class);
+//                for(DataSnapshot d:dataSnapshot.getChildren()){
+                    user u=dataSnapshot.getValue(user.class);
 
                     name.setText(u.getName());
                     email.setText(u.getEmail());
@@ -56,7 +54,7 @@ imageViewMyProfile=(ImageView)view.findViewById(R.id.imageViewMyProfile);
                     contact.setText(u.getContact());
 
                     Picasso.with(getActivity()).load(u.getPicurl()).placeholder(R.drawable.user).into(imageViewMyProfile);
-                }
+//                }
             }
 
             @Override

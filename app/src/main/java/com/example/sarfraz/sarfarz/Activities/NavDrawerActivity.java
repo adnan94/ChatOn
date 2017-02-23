@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
@@ -35,6 +34,7 @@ import com.example.sarfraz.sarfarz.Fragments.GroupFragment;
 import com.example.sarfraz.sarfarz.Fragments.MyProfile;
 import com.example.sarfraz.sarfarz.Fragments.StatusFragment;
 import com.example.sarfraz.sarfarz.Fragments.UpdateInfo;
+import com.example.sarfraz.sarfarz.Notificationn;
 import com.example.sarfraz.sarfarz.R;
 import com.example.sarfraz.sarfarz.Utils;
 import com.example.sarfraz.sarfarz.user;
@@ -73,6 +73,8 @@ public class NavDrawerActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_drawer);
+        Intent i=new Intent(this, Notificationn.class);
+        startService(i);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

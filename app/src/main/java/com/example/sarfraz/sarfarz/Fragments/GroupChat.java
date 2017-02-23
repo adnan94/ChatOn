@@ -2,7 +2,6 @@ package com.example.sarfraz.sarfarz.Fragments;
 
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,6 +69,8 @@ public class GroupChat extends Fragment {
             @Override
             public void onClick(View v) {
                 fire.child("AppData").child("Conversations").child("GroupChat").child(Utils.groupName).push().setValue(new chat(Utils.name, Utils.picurl, Utils.uid, "message", message.getText().toString()));
+                fire.child("AppData").child("Notificationn").child("GroupChat").child(Utils.uid).push().setValue(new chat(Utils.name, Utils.picurl, Utils.uid, "message", message.getText().toString()));
+
                 message.setText("");
             }
         });

@@ -2,7 +2,6 @@ package com.example.sarfraz.sarfarz.Activities;
 
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sarfraz.sarfarz.Adaptors.chatAdaptor;
 import com.example.sarfraz.sarfarz.R;
@@ -66,9 +66,21 @@ public class ChatFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 fire.child("AppData").child("Conversations").child("OneToOne").child(Utils.uid).child(Utils.pid).push().setValue(new chat(Utils.name, Utils.picurl, Utils.uid, "message", message.getText().toString()));
-                fire.child("AppData").child("Conversations").child("OneToOne").child(Utils.pid).child(Utils.uid).push().setValue(new chat(Utils.name, Utils.picurl, Utils.uid, "message", message.getText().toString()));
+                fire.child("AppData").child("Conversations").child("OneToOne").child(Utils.pid).child(Utils.uid).push().setValue(new chat(Utils.name, Utils.picurl, Utils.uid, "message", message.getText().toString()), new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                        fire.child("AppData").child("Notificationn").child("OneToOne").child(Utils.pid).push().setValue(new chat(Utils.name, Utils.picurl, Utils.uid, "message", message.getText().toString()), new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+//
+                                message.setText("");
 
-                message.setText("");
+                            }
+                        });
+
+                    }
+
+                    });
             }
         });
 
