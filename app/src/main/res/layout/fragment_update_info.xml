@@ -3,63 +3,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d9d9d9"
-    tools:context="com.example.sarfraz.sarfarz.Fragments.UpdateInfo"
+    android:clickable="true"
+    android:focusable="true"
     android:orientation="vertical"
+    tools:context="com.example.sarfraz.sarfarz.Fragments.UpdateInfo"
+
     >
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:text="Email"
-        android:textSize="25dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:id="@+id/textView" />
+        android:textSize="25dp" />
 
     <EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#fff"
-android:id="@+id/editTextEmail"
-    />
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:text="Date Of Birth"
-        android:textSize="25dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        />
+        android:textSize="25dp" />
 
     <EditText
+        android:id="@+id/editTextDateOfBirth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-android:id="@+id/editTextDateOfBirth"
-      android:background="#fff"
-        />
+        android:background="#fff" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Contact"
-        android:textSize="25dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        />
+        android:text="Contact"
+        android:textSize="25dp" />
+
     <EditText
+        android:id="@+id/editTextContact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-android:id="@+id/editTextContact"
-        android:background="#fff"
-        />
+        android:background="#fff" />
 
     <Button
+        android:id="@+id/buttonUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update"
-        android:textColor="#fff"
         android:layout_marginTop="20dp"
         android:background="#4052b5"
-        android:id="@+id/buttonUpdate" />
+        android:text="Update"
+        android:textColor="#fff" />
 </LinearLayout>

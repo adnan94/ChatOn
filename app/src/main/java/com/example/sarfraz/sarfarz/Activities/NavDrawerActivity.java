@@ -73,7 +73,7 @@ public class NavDrawerActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_drawer);
-        Intent i=new Intent(this, Notificationn.class);
+        Intent i = new Intent(this, Notificationn.class);
         startService(i);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -309,7 +309,7 @@ public class NavDrawerActivity extends AppCompatActivity
             FirebaseAuth.getInstance().signOut();
             Intent i = new Intent(NavDrawerActivity.this, SignInActivity.class);
             startActivity(i);
-
+            finish();
         } else if (id == R.id.nav_allGroups) {
             FragmentTransaction mtransaction = manager.beginTransaction();
             AllGroups allGroups = new AllGroups();

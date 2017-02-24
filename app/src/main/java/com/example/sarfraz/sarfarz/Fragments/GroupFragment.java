@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -65,6 +66,8 @@ String url="";
         pd=new ProgressDialog(getActivity());
         pd.setTitle("Uploading ..");
         pd.setMessage("Wait while uploading..");
+        storegeRef = FirebaseStorage.getInstance().getReference();
+
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

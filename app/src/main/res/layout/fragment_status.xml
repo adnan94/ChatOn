@@ -6,6 +6,9 @@
     tools:context="com.example.sarfraz.sarfarz.Fragments.StatusFragment"
     android:orientation="vertical"
     android:padding="10dp"
+    android:clickable="true"
+    android:focusable="true"
+
     >
 
 
