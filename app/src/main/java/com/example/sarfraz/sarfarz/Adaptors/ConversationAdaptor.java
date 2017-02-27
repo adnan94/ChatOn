@@ -22,12 +22,12 @@ import java.util.ArrayList;
 public class ConversationAdaptor extends BaseAdapter {
     ArrayList<user> list;
     Context context;
-LayoutInflater inflater;
+    LayoutInflater inflater;
 
     public ConversationAdaptor(ArrayList<user> list, Context context) {
         this.list = list;
         this.context = context;
-        inflater=LayoutInflater.from(context);
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -47,9 +47,9 @@ LayoutInflater inflater;
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-     View v=inflater.inflate(R.layout.single_item,null,false);
-        TextView name=(TextView)v.findViewById(R.id.textViewNameSingleItem);
-        ImageView iv=(ImageView)v.findViewById(R.id.imageViewSingleItem);
+        View v = inflater.inflate(R.layout.single_item, null, false);
+        TextView name = (TextView) v.findViewById(R.id.textViewNameSingleItem);
+        de.hdodenhof.circleimageview.CircleImageView iv = (de.hdodenhof.circleimageview.CircleImageView) v.findViewById(R.id.imageViewSingleItem);
         Picasso.with(context).load(list.get(position).getPicurl()).placeholder(R.drawable.user).into(iv);
 
         name.setText(list.get(position).getName());

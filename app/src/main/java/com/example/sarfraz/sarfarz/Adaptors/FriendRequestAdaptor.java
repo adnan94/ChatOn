@@ -51,7 +51,7 @@ public class FriendRequestAdaptor extends BaseAdapter {
         TextView name=(TextView)v.findViewById(R.id.textViewNameSingleItem);
         TextView admin=(TextView)v.findViewById(R.id.textViewSingleItem);
 
-        ImageView iv=(ImageView)v.findViewById(R.id.imageViewSingleItem);
+        de.hdodenhof.circleimageview.CircleImageView iv=(de.hdodenhof.circleimageview.CircleImageView)v.findViewById(R.id.imageViewSingleItem);
         Picasso.with(context).load(list.get(position).getPicurl()).placeholder(R.drawable.user).into(iv);
 
         name.setText(list.get(position).getName());

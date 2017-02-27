@@ -21,7 +21,7 @@ import org.w3c.dom.Text;
  */
 public class MyProfile extends Fragment {
 TextView name,email,status,birthday,contact;
-ImageView imageViewMyProfile;
+    de.hdodenhof.circleimageview.CircleImageView imageViewMyProfile;
     public MyProfile() {
         // Required empty public constructor
     }
@@ -38,7 +38,7 @@ ImageView imageViewMyProfile;
         birthday=(TextView)view.findViewById(R.id.textViewBirthdayMyProfile);
         contact=(TextView)view.findViewById(R.id.textViewContact);
         contact=(TextView)view.findViewById(R.id.textViewContact);
-        imageViewMyProfile=(ImageView)view.findViewById(R.id.imageViewMyProfile);
+        imageViewMyProfile=(de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.imageViewMyProfile);
 
         name.setText(Utils.name);
         email.setText(Utils.email);

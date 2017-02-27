@@ -63,7 +63,7 @@ public class NavDrawerActivity extends AppCompatActivity
     ViewPager viewPager;
     DatabaseReference fire;
     StorageReference storegeRef, imgRef;
-    ImageView iv;
+    de.hdodenhof.circleimageview.CircleImageView iv;
     ProgressDialog pd;
     TextView textView;
     public static NavDrawerActivity context;
@@ -158,7 +158,7 @@ public class NavDrawerActivity extends AppCompatActivity
         View header = navigationView.getHeaderView(0);
         TextView nameNAv = (TextView) header.findViewById(R.id.nameNav);
         TextView emailNav = (TextView) header.findViewById(R.id.emailNav);
-        iv = (ImageView) findViewById(R.id.imageViewNav);
+        iv = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.imageViewNav);
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

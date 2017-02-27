@@ -23,7 +23,7 @@ import com.squareup.picasso.Picasso;
 
 public class FriendProfile extends Fragment{
     TextView name,email,status,birthday,contact;
-ImageView imageViewMyProfile;
+    de.hdodenhof.circleimageview.CircleImageView imageViewMyProfile;
     public FriendProfile() {
         // Required empty public constructor
     }
@@ -39,7 +39,7 @@ ImageView imageViewMyProfile;
         status=(TextView)view.findViewById(R.id.textViewStatusMyProfile);
         birthday=(TextView)view.findViewById(R.id.textViewBirthdayMyProfile);
         contact=(TextView)view.findViewById(R.id.textViewContact);
-imageViewMyProfile=(ImageView)view.findViewById(R.id.imageViewMyProfile);
+imageViewMyProfile=(de.hdodenhof.circleimageview.CircleImageView)view.findViewById(R.id.imageViewMyProfile);
 
         FirebaseDatabase.getInstance().getReference().child("AppData").child("Users").child(Utils.tempFriendUid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
