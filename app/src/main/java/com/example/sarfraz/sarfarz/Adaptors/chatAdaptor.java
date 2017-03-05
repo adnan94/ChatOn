@@ -5,11 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.sarfraz.sarfarz.Activities.NavDrawerActivity;
 import com.example.sarfraz.sarfarz.R;
 import com.example.sarfraz.sarfarz.Utils;
 import com.example.sarfraz.sarfarz.chat;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -51,6 +55,16 @@ View v;
             v=inflater.inflate(R.layout.right,null,false);
             TextView name=(TextView) v.findViewById(R.id.textViewName);
             TextView message=(TextView) v.findViewById(R.id.textViewMessage);
+            ImageView iv=(ImageView)v.findViewById(R.id.ivRight);
+            RelativeLayout relativeLayout=(RelativeLayout)v.findViewById(R.id.root);
+            if(list.get(position).getType().equals("image")){
+                relativeLayout.setVisibility(View.GONE);
+    Picasso.with(context).load(list.get(position).getPicurl()).into(iv);
+}else{
+                relativeLayout.setVisibility(View.VISIBLE);
+            }
+//            Picasso.with(context).load(list.get(position).getPicurl()).into(iv);
+
             name.setText(list.get(position).getName());
             message.setText(list.get(position).getMessage());
 
@@ -58,6 +72,15 @@ View v;
             v=inflater.inflate(R.layout.left,null,false);
             TextView name=(TextView) v.findViewById(R.id.textViewName);
             TextView message=(TextView) v.findViewById(R.id.textViewMessage);
+            ImageView iv=(ImageView)v.findViewById(R.id.ivLeft);
+            RelativeLayout relativeLayout=(RelativeLayout)v.findViewById(R.id.root);
+            if(list.get(position).getType().equals("image")){
+                relativeLayout.setVisibility(View.GONE);
+                Picasso.with(context).load(list.get(position).getPicurl()).into(iv);
+            }else{
+                relativeLayout.setVisibility(View.VISIBLE);
+
+            }
             name.setText(list.get(position).getName());
             message.setText(list.get(position).getMessage());
         }

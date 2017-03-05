@@ -173,23 +173,13 @@ public class NavDrawerActivity extends AppCompatActivity
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0 && data != null) {
-            pd.show();
-            String path = getRealPathFromURI(data.getData());
-            getImage(path, data);
-        }
-
-    }
 
     private String getRealPathFromURI(Uri contentURI) {
         String result;
         Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
         if (cursor == null) { // Source is Dropbox or other similar local file path
             result = contentURI.getPath();
-        } else {
+            } else {
             cursor.moveToFirst();
             int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
             result = cursor.getString(idx);

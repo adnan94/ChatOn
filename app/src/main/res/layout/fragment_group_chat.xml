@@ -3,45 +3,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d9d9d9"
+    android:background="#3e3e3e"
     android:clickable="true"
     android:focusable="true"
-
     tools:context="com.example.sarfraz.sarfarz.Fragments.GroupChat">
 
     <!-- TODO: Update blank fragment layout -->
 
 
     <EditText
+        android:id="@+id/editTextGroupSent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-android:hint="Write Message Here"
-        android:ems="10"
-        android:id="@+id/editTextGroupSent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/imageButtonGroupSent"
-        android:layout_toLeftOf="@+id/imageButtonGroupSent" />
+        android:layout_toLeftOf="@+id/imageUploadChat"
+        android:layout_toStartOf="@+id/imageUploadChat"
+        android:ems="10"
+        android:textColor="#fff"
+        android:hint="Write Message Here"
+        android:inputType="textPersonName" />
 
     <ListView
+        android:id="@+id/listViewGroupChat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/editTextGroupSent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/listViewGroupChat"
-        android:divider="@null"
-        android:layout_above="@+id/imageButtonGroupSent" />
+        android:layout_alignParentTop="true"
+        android:divider="@null" />
 
     <ImageButton
+        android:id="@+id/imageButtonGroupSent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_media_play"
-        android:id="@+id/imageButtonGroupSent"
-        android:background="#00000000"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="5dp"
+        android:background="#00000000"
+        app:srcCompat="@drawable/ic_menu_send" />
+
+    <ImageButton
+        android:id="@+id/imageUploadChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listViewGroupChat"
+        android:layout_toLeftOf="@+id/imageButtonGroupSent"
+        android:layout_toStartOf="@+id/imageButtonGroupSent"
+        android:background="#00000000"
+        app:srcCompat="@drawable/ic_menu_gallery" />
 </RelativeLayout>

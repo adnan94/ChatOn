@@ -14,9 +14,10 @@
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="11dp"
-        android:background="@drawable/corner_right"
+        android:background="@drawable/outgoing_xml"
         android:gravity="right"
         android:minWidth="150dp"
+android:id="@+id/root"
         android:padding="8dp">
 
         <TextView
@@ -26,7 +27,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:padding="5dp"
+            android:paddingRight="15dp"
             android:text="TextView"
             android:textColor="#000"
             android:textStyle="bold" />
@@ -38,8 +39,19 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/textViewName"
-            android:text="TextView" />
+            android:text="TextView"
+            android:paddingRight="15dp"
+            />
     </RelativeLayout>
 
-
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/root"
+        android:layout_marginRight="20dp"
+        android:id="@+id/ivRight"
+        android:maxHeight="150dp"
+        android:maxWidth="150dp"
+        android:layout_alignParentRight="true"
+        />
 </RelativeLayout>
